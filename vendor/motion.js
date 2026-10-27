@@ -56,18 +56,9 @@
       });
     }
 
-    // появление секций
-    document.querySelectorAll('.features, .shelf, .foot').forEach(function (block) {
-      var kids = block.querySelectorAll('.feat, .card, .foot h4, .foot p');
-      if (!kids.length) return;
-      if (soft) {
-        gsap.from(kids, { opacity: 0, duration: 0.5, stagger: 0.05, ease: 'power1.out',
-          scrollTrigger: { trigger: block, start: 'top 88%' } });
-      } else {
-        gsap.from(kids, { y: 28, opacity: 0, duration: 0.8, ease: 'power3.out', stagger: 0.08,
-          scrollTrigger: { trigger: block, start: 'top 82%' } });
-      }
-    });
+    // Секции НЕ прячем: gsap.from с scrollTrigger оставляет блок невидимым до триггера,
+    // и при быстром скролле в ленте появляются пустые полосы. Движение — только в герое,
+    // бегущей строке, параллаксе и полосе прогресса.
 
     window.__motionReady = true;
   }
