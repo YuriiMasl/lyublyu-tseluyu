@@ -99,7 +99,9 @@
     .chip-float{left:12px;bottom:12px;padding:12px 16px 13px;border-radius:16px}
     .chip-float b{font-size:25px}
     .hero h1{font-size:clamp(30px,8.4vw,42px)}
-    .lead{font-size:15px}
+    .lead{font-size:15px;margin-top:14px}
+    .actions{margin-top:20px}
+    .proof{display:none}
     .actions .btn{flex:1 1 auto}
   }
 
@@ -218,6 +220,7 @@
     html{scroll-behavior:auto}
     *,*::before,*::after{animation:none!important;transition:none!important}
   }
+  .prog{position:fixed;top:0;left:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left center;z-index:120;pointer-events:none}
 </style>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Люблю, целую">
@@ -231,6 +234,7 @@
   <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
+<div class="prog" id="prog" aria-hidden="true"></div>
 
 <header class="top">
   <div class="wrap top__in">
@@ -574,6 +578,16 @@
   }
 
   var hero = document.querySelector('.hero');
+  // полоса прогресса скролла
+  var prog = document.getElementById('prog');
+  if (prog) {
+    gsap.set(prog, { scaleX: 0, transformOrigin: 'left center' });
+    gsap.to(prog, {
+      scaleX: 1, ease: 'none',
+      scrollTrigger: { trigger: document.body, start: 'top top', end: 'bottom bottom', scrub: 0.3 }
+    });
+  }
+
   if (hero) {
     var words = hero.querySelectorAll('.h1-word, .hero h1 em');
     gsap.set(words, { yPercent: 115, opacity: 0 });
