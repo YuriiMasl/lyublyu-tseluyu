@@ -221,6 +221,14 @@
     *,*::before,*::after{animation:none!important;transition:none!important}
   }
   .prog{position:fixed;top:0;left:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left center;z-index:120;pointer-events:none}
+
+  /* бегущая строка под первым экраном */
+  .ticker{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#FFFFFF}
+  .ticker__in{display:flex;gap:34px;white-space:nowrap;padding:14px 0;animation:tickerMove 26s linear infinite;width:max-content}
+  .ticker span{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .ticker b{color:var(--accent);font-weight:600}
+  @keyframes tickerMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion: reduce){.ticker__in{animation:none}}
 </style>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Люблю, целую">
@@ -278,7 +286,15 @@
     </div>
   </section>
 
-  <section class="features" id="delivery">
+  <div class="ticker" aria-hidden="true"><div class="ticker__in">
+  <span>Свежие цветы каждый день</span><span>·</span><span><b>Доставка за 2 часа</b></span><span>·</span>
+  <span>Фото букета перед отправкой</span><span>·</span><span>На воде, в переноске</span><span>·</span>
+  <span>Собираем под ваш бюджет</span><span>·</span><span>Заказ в WhatsApp</span><span>·</span>
+  <span>Свежие цветы каждый день</span><span>·</span><span><b>Доставка за 2 часа</b></span><span>·</span>
+  <span>Фото букета перед отправкой</span><span>·</span><span>На воде, в переноске</span><span>·</span>
+  <span>Собираем под ваш бюджет</span><span>·</span><span>Заказ в WhatsApp</span><span>·</span>
+</div></div>
+<section class="features" id="delivery">
     <div class="wrap features__in">
       <div class="feat"><b>2 часа</b><span>Собираем и привозим по Воронежу</span></div>
       <div class="feat"><b>Фото букета</b><span>Пришлём перед отправкой курьера</span></div>
