@@ -81,12 +81,8 @@
   .scroll-cue span{display:block;width:1px;height:46px;background:linear-gradient(var(--muted),transparent);animation:cue 2.4s var(--ease) infinite}
   @keyframes cue{0%{transform:scaleY(.2);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}100%{transform:scaleY(.2);transform-origin:top}}
 
-  /* ---------- marquee ---------- */
-  .ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;overflow:hidden;background:var(--mint-deep)}
-  .ticker__row{display:flex;gap:40px;width:max-content;animation:slide 34s linear infinite}
-  .ticker__row span{font-family:var(--serif);font-style:italic;font-size:clamp(20px,2.4vw,30px);white-space:nowrap;opacity:.8}
-  .ticker__row i{font-style:normal;color:var(--terracotta);opacity:.7}
-  @keyframes slide{to{transform:translateX(-50%)}}
+  /* ---------- тихая линия вместо бегущей строки ---------- */
+  .hairline{height:1px;background:var(--line);margin:0}
 
   /* ---------- lookbook ---------- */
   .look{padding:clamp(64px,9vw,120px) 0}
@@ -234,12 +230,7 @@
     <div class="scroll-cue">Листайте<span></span></div>
   </section>
 
-  <div class="ticker" aria-hidden="true">
-    <div class="ticker__row" id="ticker">
-      <span>альстромерии</span><i>✦</i><span>гортензии</span><i>✦</i><span>ранункулюсы</span><i>✦</i><span>пионовидные розы</span><i>✦</i><span>маттиола</span><i>✦</i>
-      <span>альстромерии</span><i>✦</i><span>гортензии</span><i>✦</i><span>ранункулюсы</span><i>✦</i><span>пионовидные розы</span><i>✦</i><span>маттиола</span><i>✦</i>
-    </div>
-  </div>
+  <div class="hairline" aria-hidden="true"></div>
 
   <section class="look" id="look">
     <div class="wrap">
