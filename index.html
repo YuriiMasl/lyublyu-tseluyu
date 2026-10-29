@@ -233,7 +233,7 @@
   .hero__in{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,4vw,64px);align-items:center;
     width:100%;padding-top:clamp(24px,4vw,48px);padding-bottom:clamp(24px,4vw,48px)}
   .hero__eyebrow{font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#678C7D}
-  .hero__title{margin:18px 0 0;font-family:var(--font-serif);font-size:clamp(42px,7.4vw,104px);line-height:.98;
+  .hero__title{margin:18px 0 0;font-family:var(--font-serif);font-size:clamp(38px,5.9vw,84px);line-height:1;
     letter-spacing:-.02em;color:#192E24;max-width:11em}
   .hero .hero__title em{font-style:italic;color:#9A594D}
   .hero__lead{margin:24px 0 0;font-size:clamp(15px,1.3vw,17px);line-height:1.66;max-width:30em;color:#4A5A50}
@@ -262,17 +262,17 @@
   .credit{margin:18px 0 0;font-size:11.5px;color:#9AA39C}
   .credit a{color:inherit;border-bottom:1px solid rgba(154,163,156,.5);text-decoration:none}
 
-  .hero__bleed{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-  .hero__bleed img,.hero__bleed video{width:100%;height:100%;object-fit:cover;object-position:80% center}
+  .hero__bleed{position:absolute;top:0;right:0;bottom:0;left:55%;pointer-events:none;overflow:hidden}
+  .hero__bleed img,.hero__bleed video{width:100%;height:100%;object-fit:cover;object-position:center}
   .hero__wash{position:absolute;inset:0;pointer-events:none;background:
-      linear-gradient(90deg,#E7F4EC 0%,#E7F4EC 30%,rgba(231,244,236,.9) 42%,rgba(231,244,236,.55) 54%,rgba(231,244,236,.12) 66%,rgba(231,244,236,0) 74%),
-      linear-gradient(180deg,rgba(231,244,236,0) 66%,rgba(231,244,236,.55) 88%,#E7F4EC 100%)}
+      linear-gradient(90deg,#E7F4EC 0%,rgba(231,244,236,.94) 10%,rgba(231,244,236,.62) 26%,rgba(231,244,236,.22) 44%,rgba(231,244,236,.03) 62%,rgba(231,244,236,0) 74%),
+      linear-gradient(180deg,rgba(231,244,236,0) 86%,rgba(231,244,236,.5) 96%,#E7F4EC 100%)}
   .hero__caption{margin-top:16px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:#7F9086}
   @media (max-width:900px){
     .hero__frame{display:block;min-height:auto}
     .hero__bleed{position:absolute;top:0;left:0;right:0;bottom:auto;width:100%;height:min(54vh,440px);margin:0}
     .hero__bleed img,.hero__bleed video{object-position:50% 45%}
-    .hero__wash{background:linear-gradient(180deg,rgba(231,244,236,0) 0%,rgba(231,244,236,.1) 52%,rgba(231,244,236,.72) 82%,#E7F4EC 96%)}
+    .hero__wash{background:linear-gradient(180deg,rgba(231,244,236,0) 0%,rgba(231,244,236,0) 58%,rgba(231,244,236,.55) 82%,rgba(231,244,236,.9) 94%,#E7F4EC 100%)}
     .hero__in{padding-top:min(54vh,440px)}
   }
 </style>
@@ -311,7 +311,7 @@
   <section class="hero">
     <div class="hero__frame">
       <div class="hero__bleed">
-        <video class="hero__film" autoplay muted loop playsinline preload="metadata"
+        <video class="hero__film" autoplay muted loop playsinline webkit-playsinline preload="auto"
                poster="assets/hero-bloom.webp"
                aria-label="Альстромерии распускаются — короткое видео">
           <source src="assets/hero-bloom.mp4" type="video/mp4">
@@ -536,14 +536,38 @@
   var top = document.querySelector('.top');
   var shot = document.querySelector('.hero__shot');
 
-  // герой-видео: уважаем reduce-motion, пауза в скрытой вкладке
+  // герой-видео: iOS-фолбэки автоплея, reduce-motion, пауза в скрытой вкладке
   var film = document.querySelector('.hero__film');
   if (film) {
-    if (reduce) { film.removeAttribute('autoplay'); try { film.pause(); } catch (e) {} }
-    document.addEventListener('visibilitychange', function () {
-      if (document.hidden) { try { film.pause(); } catch (e) {} }
-      else if (!reduce) { var pr = film.play(); if (pr && pr.catch) pr.catch(function () {}); }
-    });
+    var tryFilm = function () {
+      if (reduce) return;
+      // iOS требует muted как свойство и атрибут перед play()
+      film.muted = true;
+      film.setAttribute('muted', '');
+      film.controls = false;
+      var pr = film.play();
+      if (pr && pr.catch) pr.catch(function () {});
+    };
+    if (reduce) {
+      film.removeAttribute('autoplay');
+      try { film.pause(); } catch (e) {}
+    } else {
+      tryFilm();
+      film.addEventListener('canplay', tryFilm);
+      film.addEventListener('loadeddata', tryFilm);
+      document.addEventListener('touchstart', tryFilm, { passive: true, once: true });
+      document.addEventListener('pointerdown', tryFilm, { passive: true, once: true });
+      window.addEventListener('load', tryFilm);
+      // iOS в режиме энергосбережения откладывает автоплей — пробуем ещё несколько раз
+      var filmTries = 0;
+      var filmTimer = setInterval(function () {
+        if (!film.paused || filmTries++ > 8) { clearInterval(filmTimer); return; }
+        tryFilm();
+      }, 600);
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) { try { film.pause(); } catch (e) {} } else { tryFilm(); }
+      });
+    }
   }
   var ticking = false;
 
