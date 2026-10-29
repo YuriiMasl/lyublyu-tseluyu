@@ -264,6 +264,9 @@
 
   .hero__bleed{position:absolute;top:0;right:0;bottom:0;left:55%;pointer-events:none;overflow:hidden}
   .hero__bleed img,.hero__bleed video{width:100%;height:100%;object-fit:cover;object-position:center}
+  .hero__poster{position:absolute;inset:0}
+  .hero__film{position:absolute;inset:0;opacity:0;transition:opacity .5s ease}
+  .hero__film.is-on{opacity:1}
   .hero__wash{position:absolute;inset:0;pointer-events:none;background:
       linear-gradient(90deg,#E7F4EC 0%,rgba(231,244,236,.94) 10%,rgba(231,244,236,.62) 26%,rgba(231,244,236,.22) 44%,rgba(231,244,236,.03) 62%,rgba(231,244,236,0) 74%),
       linear-gradient(180deg,rgba(231,244,236,0) 86%,rgba(231,244,236,.5) 96%,#E7F4EC 100%)}
@@ -311,11 +314,11 @@
   <section class="hero">
     <div class="hero__frame">
       <div class="hero__bleed">
+        <img class="hero__poster" src="assets/hero-bloom.webp" alt="Альстромерии распускаются" fetchpriority="high">
         <video class="hero__film" autoplay muted loop playsinline webkit-playsinline preload="auto"
                poster="assets/hero-bloom.webp"
                aria-label="Альстромерии распускаются — короткое видео">
           <source src="assets/hero-bloom.mp4" type="video/mp4">
-          <img src="assets/alstro.webp" alt="Розовые альстромерии" fetchpriority="high">
         </video>
         <span class="hero__wash" aria-hidden="true"></span>
       </div>
@@ -552,6 +555,9 @@
       film.removeAttribute('autoplay');
       try { film.pause(); } catch (e) {}
     } else {
+      // видео проявляется только когда реально пошло воспроизведение;
+      // иначе на iOS остаётся статичный постер вместо кнопки play
+      film.addEventListener('playing', function () { film.classList.add('is-on'); });
       tryFilm();
       film.addEventListener('canplay', tryFilm);
       film.addEventListener('loadeddata', tryFilm);
