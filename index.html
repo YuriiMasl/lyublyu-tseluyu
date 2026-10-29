@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23B4564B'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='28' fill='%23fff' text-anchor='middle'%3E%D0%9B%D0%A6%3C/text%3E%3C/svg%3E">
-<meta name="theme-color" content="#FBF7F2">
+<meta name="theme-color" content="#E7F4EC">
 <meta name="robots" content="noindex, nofollow">
 <title>Люблю, целую — букеты с доставкой по Воронежу</title>
 <meta name="description" content="Цветочный салон «Люблю, целую» в Воронеже: букеты из пионовидных роз, гортензий и ранункулюсов. Доставка за 2 часа, фото перед отправкой.">
 <style>
   :root{
-    --bg:#FBF7F2;
+    --bg:#E7F4EC;
     --card:#FFFFFF;
     --ink:#221E1B;
     --muted:#6E645B;
@@ -39,7 +39,7 @@
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
   /* ---------- header ---------- */
-  .top{position:sticky;top:0;z-index:40;background:rgba(251,247,242,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .top{position:sticky;top:0;z-index:40;background:rgba(231,244,236,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
   .top__in{display:flex;align-items:center;gap:28px;height:68px}
   .brand{display:flex;align-items:center;gap:14px;line-height:1.1}
   .brand b{font-family:var(--font-serif);font-style:italic;font-size:21px;font-weight:400;letter-spacing:.01em;white-space:nowrap}
@@ -171,7 +171,7 @@
   @media (max-width:760px){.foot__in{grid-template-columns:1fr 1fr;gap:20px}.foot__brand{grid-column:1/-1}}
 
   /* ---------- mobile bar ---------- */
-  .mobilebar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:none;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(251,247,242,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+  .mobilebar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:none;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(231,244,236,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line)}
   .mobilebar .btn{flex:1;padding:14px 10px;font-size:15px}
   @media (max-width:900px){.mobilebar{display:flex}}
 
@@ -225,10 +225,10 @@
 
   /* ---------- первый экран: пастель по референсу (лёд, мята, сериф) ---------- */
   .hero{padding:0;background:
-      radial-gradient(1100px 520px at 88% 8%,rgba(217,181,184,.42),rgba(217,181,184,0) 62%),
-      radial-gradient(900px 480px at 6% 92%,rgba(173,217,221,.40),rgba(173,217,221,0) 60%),
-      linear-gradient(180deg,#E4F7FD 0%,#EFFAFB 46%,#FBFCF9 100%)}
-  .hero__frame{position:relative;overflow:hidden;border-radius:0 0 38px 38px;display:flex;align-items:center;
+      radial-gradient(1100px 520px at 86% 6%,rgba(217,181,184,.14),rgba(217,181,184,0) 62%),
+      radial-gradient(900px 480px at 8% 96%,rgba(173,217,221,.18),rgba(173,217,221,0) 60%),
+      linear-gradient(180deg,#E7F4EC 0%,#E9F6EF 52%,#E7F4EC 100%)}
+  .hero__frame{position:relative;overflow:hidden;display:flex;align-items:center;
     min-height:clamp(560px,86vh,840px)}
   .hero__in{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,4vw,64px);align-items:center;
     width:100%;padding-top:clamp(24px,4vw,48px);padding-bottom:clamp(24px,4vw,48px)}
@@ -258,20 +258,22 @@
     .hero__caption{text-align:center}
   }
 
-  .top{background:rgba(251,248,243,.82);backdrop-filter:saturate(1.2) blur(10px);border-bottom-color:rgba(227,216,201,.55)}
+  .top{background:rgba(231,244,236,.88);backdrop-filter:saturate(1.2) blur(10px);border-bottom-color:rgba(199,220,207,.7)}
   .credit{margin:18px 0 0;font-size:11.5px;color:#9AA39C}
   .credit a{color:inherit;border-bottom:1px solid rgba(154,163,156,.5);text-decoration:none}
 
-  .hero__bleed{position:absolute;top:0;right:0;bottom:0;width:min(54%,820px);pointer-events:none}
-  .hero__bleed img,.hero__bleed video{width:100%;height:100%;object-fit:cover;object-position:center;
-    -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.55) 16%,#000 38%,#000 100%);
-    mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.55) 16%,#000 38%,#000 100%)}
+  .hero__bleed{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+  .hero__bleed img,.hero__bleed video{width:100%;height:100%;object-fit:cover;object-position:80% center}
+  .hero__wash{position:absolute;inset:0;pointer-events:none;background:
+      linear-gradient(90deg,#E7F4EC 0%,#E7F4EC 30%,rgba(231,244,236,.9) 42%,rgba(231,244,236,.55) 54%,rgba(231,244,236,.12) 66%,rgba(231,244,236,0) 74%),
+      linear-gradient(180deg,rgba(231,244,236,0) 66%,rgba(231,244,236,.55) 88%,#E7F4EC 100%)}
   .hero__caption{margin-top:16px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:#7F9086}
   @media (max-width:900px){
-    .hero__frame{display:block}
-    .hero__bleed{position:relative;width:100%;height:300px;margin:0}
-    .hero__bleed img,.hero__bleed video{-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 72%,rgba(0,0,0,0) 100%);
-      mask-image:linear-gradient(180deg,#000 0%,#000 72%,rgba(0,0,0,0) 100%)}
+    .hero__frame{display:block;min-height:min(94vh,820px)}
+    .hero__bleed{position:absolute;inset:0;width:100%;height:100%;margin:0}
+    .hero__bleed img,.hero__bleed video{object-position:50% 42%}
+    .hero__wash{background:linear-gradient(180deg,rgba(231,244,236,.04) 0%,rgba(231,244,236,.32) 24%,rgba(231,244,236,.9) 44%,#E7F4EC 56%)}
+    .hero__in{padding-top:min(46vh,430px)}
   }
 </style>
   <meta property="og:type" content="website">
@@ -315,6 +317,7 @@
           <source src="assets/hero-bloom.mp4" type="video/mp4">
           <img src="assets/alstro.webp" alt="Розовые альстромерии" fetchpriority="high">
         </video>
+        <span class="hero__wash" aria-hidden="true"></span>
       </div>
       <div class="wrap hero__in">
         <div class="hero__copy">
@@ -326,7 +329,6 @@
             <a class="hero__link" href="{{WA:general}}">написать в WhatsApp</a>
           </div>
           <div class="hero__rating"><span class="stars">★★★★★</span> &nbsp;5,0 · 56 оценок на Яндекс.Картах</div>
-          <div class="hero__caption">альстромерия этой недели · видео по фото: James Petts, CC BY-SA 2.0</div>
         </div>
       </div>
     </div>
@@ -463,7 +465,6 @@
     </div>
     <div class="foot__small">Демо-макет главной страницы. Подготовлен для обсуждения редизайна сайта.</div>
   </div>
-<p class="credit">Фото альстромерии: James Petts from London, England, <a href="https://commons.wikimedia.org/wiki/File:Pink_flower_(14190423290).jpg" rel="nofollow noopener">CC BY-SA 2.0</a></p>
 </footer>
 
 <div class="mobilebar">
